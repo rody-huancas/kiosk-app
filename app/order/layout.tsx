@@ -1,5 +1,5 @@
 import { OrderSidebar } from "@/components/order/OrderSidebar";
-import { OrderSumary } from "@/components/order/OrderSumary";
+import OrderSumary from "@/components/order/OrderSumary";
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
