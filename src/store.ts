@@ -7,19 +7,28 @@ interface Store {
   addToOrder: (product: Product) => void;
 }
 
-export const useStore = create<Store>((set) => ({
+export const useStore = create<Store>((set, get) => ({
   order: [],
   addToOrder: (product: Product) => {
     const { categoryId, image, ...data } = product;
-    set(state => ({
-      order: [
-       ...state.order,
-        {
-         ...data,
-          quantity: 1,
-          subtotal: 1 * data.price,
-        },
-      ],
-    }))
+
+    let order: OrderItem[] = [];
+    if ( get().order.find(item => item.id === product.id) ) {
+      order = get().order.map(item => item.id === product.id ? {
+        ...item,
+        quantity: item.quantity + 1,
+        subtotal: item.price * (item.quantity + 1),
+      } : item)
+    } else {
+      order = [
+        ...get().order,
+         {
+          ...data,
+           quantity: 1,
+           subtotal: 1 * data.price,
+         }
+       ];
+    }
+    set(state => ({ order }))
   },
 }));
