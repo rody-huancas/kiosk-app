@@ -4,12 +4,19 @@ import ProductDetails from "./ProductDetails";
 import { useMemo } from "react";
 import { formatCurrency } from "@/src/utils";
 import { createOrder } from "@/actions/create-order-action";
+import { OrderSchema } from "@/src/schema";
 
 export default function OrderSumary() {
   const order = useStore((state) => state.order);
   const total = useMemo(()=> order.reduce((total, item) => total + (item.quantity * item.price), 0), [order]);
 
   const handleCreateOrder = (formData: FormData) => {
+    const data = {
+      name: formData.get('name'),
+    }
+    const result = OrderSchema.safeParse(data);
+    console.log(result);
+    return;
     createOrder();
   }
 
