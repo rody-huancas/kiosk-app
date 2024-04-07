@@ -1,5 +1,9 @@
+import Heading from "@/components/ui/Heading";
+
 export default function OrdersPage() {
   return (
-    <div>page</div>
-  )
+    <>
+      <Heading>Administrar Ordenes</Heading>
+    </>
+  );
 }
