@@ -55,13 +55,14 @@ export default function ImageUpload({image}: {image: string | undefined}) {
                     fill
                     src={getImagePath(image)}
                     alt="Imagen producto"
+                    style={{objectFit: 'contain'}}
                   />
                 </div>
               </div>
             )
           }
 
-          <input type="hidden" name="image" defaultValue={imageUrl} />
+          <input type="hidden" name="image" defaultValue={image} />
         </>
       )}
     </CldUploadWidget>
